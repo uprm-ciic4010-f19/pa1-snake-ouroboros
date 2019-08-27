@@ -1,6 +1,7 @@
 package Main;
 
 import Input.KeyManager;
+
 import Input.MouseManager;
 import Worlds.WorldBase;
 
@@ -10,7 +11,7 @@ import Worlds.WorldBase;
  * Made by the people, for the people...
  */
 
-public class Handler {
+public class Handler{
 
     private GameSetUp game;
     private WorldBase world;

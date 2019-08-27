@@ -2,27 +2,48 @@ package Game.Entities.Dynamic;
 
 import Main.Handler;
 
+
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.GameStates.State;
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Created by AlexVR on 7/2/2018.
- */
-public class Player {
-
-    public int lenght;
+ */public class Player{
+	 
+	
+   
+	public int lenght;
+   
     public boolean justAte;
     private Handler handler;
 
     public int xCoord;
     public int yCoord;
 
-    public int moveCounter;
+    public static int moveCounter;
+    
 
     public String direction;//is your first name one?
+    
+    
 
-    public Player(Handler handler){
+   public Player(Handler handler) {
+	  
         this.handler = handler;
         xCoord = 0;
         yCoord = 0;
@@ -33,9 +54,15 @@ public class Player {
 
     }
 
-    public void tick(){
+   
+	// TODO Auto-generated method stub
+	
+
+
+	public void tick(){
         moveCounter++;
-        if(moveCounter>=5) {
+        if(moveCounter>=5)//where speed is change 
+        {
             checkCollisionAndMove();
             moveCounter=0;
         }
@@ -59,9 +86,11 @@ public class Player {
             case "Left":
                 if(xCoord==0){
                     kill();
+                   
                 }else{
                     xCoord--;
                 }
+               
                 break;
             case "Right":
                 if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){
@@ -84,10 +113,20 @@ public class Player {
                     yCoord++;
                 }
                 break;
+                
         }
         handler.getWorld().playerLocation[xCoord][yCoord]=true;
 
-
+        
+       /* for(int b =1; b< lenght; b++) {
+        	if(handler.getWorld().playerLocation[b][b]	== handler.getWorld().playerLocation[0][0]) {
+        		kill();
+        		
+        	}
+        }*/
+    
+        
+        
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat();
         }
@@ -96,6 +135,7 @@ public class Player {
             handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
             handler.getWorld().body.removeLast();
             handler.getWorld().body.addFirst(new Tail(x, y,handler));
+           
         }
 
     }
@@ -104,7 +144,7 @@ public class Player {
         Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.setColor(Color.WHITE);
+                g.setColor(Color.GREEN);//Cambio 
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
                     g.fillRect((i*handler.getWorld().GridPixelsize),
@@ -118,8 +158,12 @@ public class Player {
 
 
     }
+    
+   
 
-    public void Eat(){
+  
+    	public void Eat() {
+    	State.score= Math.sqrt(2*State.score + 1);//cambiooooooo
         lenght++;
         Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false;
@@ -137,7 +181,7 @@ public class Player {
                         }
                     }
                 }else{
-                    if(handler.getWorld().body.getLast().x!=handler.getWorld().GridWidthHeightPixelCount-1){
+                        if(handler.getWorld().body.getLast().x!=handler.getWorld().GridWidthHeightPixelCount-1){
                         tail=new Tail(handler.getWorld().body.getLast().x+1,this.yCoord,handler);
                     }else{
                         if(handler.getWorld().body.getLast().y!=0){

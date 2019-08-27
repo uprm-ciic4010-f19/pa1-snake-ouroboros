@@ -1,6 +1,7 @@
 package Game.GameStates;
 
 import Game.Entities.Dynamic.Player;
+
 import Main.Handler;
 import Worlds.WorldBase;
 import Worlds.WorldOne;
@@ -11,9 +12,10 @@ import java.awt.*;
 /**
  * Created by AlexVR on 7/1/2018.
  */
-public class GameState extends State {
-
+public class GameState extends State{
+    
     private WorldBase world;
+	
 
     public GameState(Handler handler){
         super(handler);
@@ -25,6 +27,7 @@ public class GameState extends State {
 
                 handler.getWorld().playerLocation[i][j]=false;
                 handler.getWorld().appleLocation[i][j]=false;
+                
 
             }
         }
@@ -32,19 +35,24 @@ public class GameState extends State {
 
 
     }
-
+    
     @Override
+    
     public void tick() {
 
         handler.getWorld().tick();
 
     }
-
+    
     @Override
+    
     public void render(Graphics g) {
-
-        handler.getWorld().render(g);
-
+     g.setColor(Color.WHITE);
+     g.setFont(new Font("arial", Font.PLAIN,14));//newwwww
+	 g.drawString("Scores: "+score, 550,20);
+	 
+     handler.getWorld().render(g);
+    
     }
-
+    
 }

@@ -31,5 +31,8 @@ public abstract class State {
 
     public abstract void render(Graphics g);
 
+    public static double score =0;//nuevo
+    
+    
 }
 

@@ -1,7 +1,14 @@
 package Input;
 
 import java.awt.event.KeyEvent;
+
+
 import java.awt.event.KeyListener;
+
+import Game.Entities.Dynamic.Player;
+
+import Game.GameStates.State;
+
 
 
 /**
@@ -43,14 +50,31 @@ public class KeyManager implements KeyListener {
 		right = keys[KeyEvent.VK_D];
 
 		pbutt = keys[KeyEvent.VK_ESCAPE];
+		
+	    
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) { //nuevooooooooo
+			//add snake tail == 1;
+			State.score = 0;
+		    
+			repaint();
+		}
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {//nuevooo
+			
+			
+		}
 		if(e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
 			return;
 		keys[e.getKeyCode()] = true;
+	}
+
+	private void repaint() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

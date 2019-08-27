@@ -6,24 +6,25 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+
+
 /**
  * Created by AlexVR on 7/1/2018.
  */
 
-public class DisplayScreen {
+public class DisplayScreen{
 
     private JFrame frame;
     private Canvas canvas;
     private String title;
     private int width, height;
+    
 
     public DisplayScreen(String title, int width, int height){
         this.title = title;
         this.width = width;
         this.height = height;
-
-
-
+        
         createDisplay();
     }
 
@@ -35,7 +36,7 @@ public class DisplayScreen {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setBackground(Color.black);
-
+       
         try {
             frame.setIconImage(ImageIO.read(new File("res/Sheets/icon.png")));
         } catch (IOException e) {
@@ -47,11 +48,20 @@ public class DisplayScreen {
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
-        canvas.setBackground(Color.black);
-
+        Color myPurple = new Color(128,0,128);
+        canvas.setBackground(myPurple);
+    
+      
+        
+        
         frame.add(canvas);
         frame.pack();
-    }
+}  
+
+   
+   
+
+    
 
     public Canvas getCanvas(){
         return canvas;
@@ -60,5 +70,6 @@ public class DisplayScreen {
     public JFrame getFrame(){
         return frame;
     }
+    
+  }
 
-}

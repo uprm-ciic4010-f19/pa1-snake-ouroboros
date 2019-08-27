@@ -32,7 +32,7 @@ public class GameSetUp implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
 
-
+    //public int score = 0;//score new
 
     //Input
     private KeyManager keyManager;
