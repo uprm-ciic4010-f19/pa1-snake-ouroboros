@@ -47,9 +47,7 @@ public class GameState extends State{
     @Override
     
     public void render(Graphics g) {
-     g.setColor(Color.WHITE);
-     g.setFont(new Font("arial", Font.PLAIN,14));//newwwww
-	 g.drawString("Scores: "+score, 550,20);
+    
 	 
      handler.getWorld().render(g);
     

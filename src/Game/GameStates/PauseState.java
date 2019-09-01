@@ -1,17 +1,28 @@
 package Game.GameStates;
 
 import Main.Handler;
+
+
 import Resources.Images;
 import UI.UIImageButton;
 import UI.UIManager;
 
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.ImageIcon;
+
+
+
+
 
 /**
  * Created by AlexVR on 7/1/2018.
  */
 public class PauseState extends State {
-
+ 
     private int count = 0;
     private UIManager uiManager;
 
@@ -57,12 +68,20 @@ public class PauseState extends State {
 
 
     }
-
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Images.Pause,0,0,800,600,null);
-        uiManager.Render(g);
-
-    }
    
-} 
+
+    
+
+	@Override
+    public void render(Graphics g) {
+    	
+        g.drawImage(Images.Pause,0,0,800,600,null);
+       uiManager.Render(g);
+        
+    	
+    }
+  
+	
+	
+
+}

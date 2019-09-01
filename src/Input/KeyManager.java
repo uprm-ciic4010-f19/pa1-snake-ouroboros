@@ -3,12 +3,13 @@ package Input;
 import java.awt.event.KeyEvent;
 
 
+
 import java.awt.event.KeyListener;
 
 import Game.Entities.Dynamic.Player;
-
+import Game.Entities.Dynamic.Tail;
+import Game.GameStates.PauseState;
 import Game.GameStates.State;
-
 
 
 /**
@@ -17,9 +18,12 @@ import Game.GameStates.State;
 
 public class KeyManager implements KeyListener {
 
+	
+	
 	private boolean[] keys,justPressed,cantPress;
 	public boolean up=false, down=false, left=false, right=false;
 	public boolean pbutt=false;
+	
 
 
 	public KeyManager(){
@@ -54,23 +58,54 @@ public class KeyManager implements KeyListener {
 	    
 
 	}
+	
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) { //nuevooooooooo
 			//add snake tail == 1;
 			State.score = 0;
+			State.speed = 5;
+			Player.lenght = 1;
+			/*for(int i =1; i>Player.lenght; i ++) {
+			Player.handler.getWorld().body.removeLast();
+			}*/
 		    
 			repaint();
 		}
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {//nuevooo
+		
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){//nuevoo
 			
 			
-		}
+			//PauseState pause = new PauseState(Player.handler);
+			
+			 
+			}
+			
+		
+		
+        if(e.getKeyCode() == KeyEvent.VK_N) {//nuevooo
+          
+          Player.lenght++;
+          Player.handler.getWorld().body.addFirst(new Tail(Player.xCoord,Player.yCoord,Player.handler));//anade la cola nuevoooo           
+           
+		   repaint();	
+	   }
+        if(e.getKeyCode() == KeyEvent.VK_ADD) {//nuevooo
+            State.speed --;
+            repaint();	
+ 		}
+        if(e.getKeyCode() == KeyEvent.VK_SUBTRACT) {//nuevooo
+            State.speed ++;
+            repaint();	
+ 		}
 		if(e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
 			return;
 		keys[e.getKeyCode()] = true;
 	}
+
+	
 
 	private void repaint() {
 		// TODO Auto-generated method stub
@@ -94,5 +129,6 @@ public class KeyManager implements KeyListener {
 			return false;
 		return justPressed[keyCode];
 	}
+	 
 
 }

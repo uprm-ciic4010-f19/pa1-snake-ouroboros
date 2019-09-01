@@ -4,10 +4,14 @@ import Main.Handler;
 
 
 
+
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
+
 import java.util.Random;
 
+import Display.DisplayScreen;
 import Game.GameStates.State;
 
 
@@ -26,31 +30,35 @@ import Game.GameStates.State;
  */public class Player{
 	 
 	
-   
-	public int lenght;
+    
+    
+	public static  int lenght;
    
     public boolean justAte;
-    private Handler handler;
+    public static Handler handler;
 
-    public int xCoord;
-    public int yCoord;
+    public static int  xCoord;
+    public static int  yCoord;
 
     public static int moveCounter;
+
+	
     
 
-    public String direction;//is your first name one?
+    String direction;//is your first name one?
     
     
 
    public Player(Handler handler) {
 	  
         this.handler = handler;
-        xCoord = 0;
-        yCoord = 0;
+        xCoord = 1;
+        yCoord = 1;
         moveCounter = 0;
         direction= "Right";
         justAte = false;
         lenght= 1;
+        
 
     }
 
@@ -61,13 +69,13 @@ import Game.GameStates.State;
 
 	public void tick(){
         moveCounter++;
-        if(moveCounter>=5)//where speed is change 
+        if(moveCounter>=State.speed)//where speed is change ----- new >=5
         {
             checkCollisionAndMove();
             moveCounter=0;
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
-            direction="Up";
+            direction= "Up";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
             direction="Down";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
@@ -85,7 +93,8 @@ import Game.GameStates.State;
         switch (direction){
             case "Left":
                 if(xCoord==0){
-                    kill();
+                	xCoord =59;
+                    //kill();
                    
                 }else{
                     xCoord--;
@@ -94,21 +103,24 @@ import Game.GameStates.State;
                 break;
             case "Right":
                 if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){
-                    kill();
+                	xCoord = 0;
+                    //kill();
                 }else{
                     xCoord++;
                 }
                 break;
             case "Up":
                 if(yCoord==0){
-                    kill();
+                	yCoord = 59;
+                    //kill();
                 }else{
                     yCoord--;
                 }
                 break;
             case "Down":
                 if(yCoord==handler.getWorld().GridWidthHeightPixelCount-1){
-                    kill();
+                	yCoord = 0;
+                    //kill();
                 }else{
                     yCoord++;
                 }
@@ -118,13 +130,7 @@ import Game.GameStates.State;
         handler.getWorld().playerLocation[xCoord][yCoord]=true;
 
         
-       /* for(int b =1; b< lenght; b++) {
-        	if(handler.getWorld().playerLocation[b][b]	== handler.getWorld().playerLocation[0][0]) {
-        		kill();
-        		
-        	}
-        }*/
-    
+     
         
         
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
@@ -134,25 +140,36 @@ import Game.GameStates.State;
         if(!handler.getWorld().body.isEmpty()) {
             handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
             handler.getWorld().body.removeLast();
-            handler.getWorld().body.addFirst(new Tail(x, y,handler));
+            handler.getWorld().body.addFirst(new Tail(x, y,handler)); // hace q se anada la cola
            
         }
 
     }
 
-    public void render(Graphics g,Boolean[][] playeLocation){
+    public void render(Graphics g,Boolean [][] playeLocation) {
+    	
+       /* if(playeLocation[xCoord][yCoord] ==  ){
+        	moveCounter = 0;
+             }*/
+    	  
+    	
+        
+    	
         Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
+            	
                 g.setColor(Color.GREEN);//Cambio 
-
-                if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
+                
+                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize);
+                   
                 }
-
+              
+            
             }
         }
 
@@ -162,14 +179,26 @@ import Game.GameStates.State;
    
 
   
-    	public void Eat() {
+    	
+		
+	
+
+
+		
+
+
+		public void Eat() {
+        
     	State.score= Math.sqrt(2*State.score + 1);//cambiooooooo
+    	State.speed --;//new
         lenght++;
         Tail tail= null;
-        handler.getWorld().appleLocation[xCoord][yCoord]=false;
-        handler.getWorld().appleOnBoard=false;
+        handler.getWorld().appleLocation[xCoord][yCoord]=false; //hace que se coja la manzana
+        handler.getWorld().appleOnBoard=false; // hace q aparezcan mas manzanas
         switch (direction){
-            case "Left":
+        
+            
+             case "Left" : 
                 if( handler.getWorld().body.isEmpty()){
                     if(this.xCoord!=handler.getWorld().GridWidthHeightPixelCount-1){
                         tail = new Tail(this.xCoord+1,this.yCoord,handler);
@@ -266,13 +295,26 @@ import Game.GameStates.State;
 
                 }
                 break;
+       
         }
-        handler.getWorld().body.addLast(tail);
+       
+        handler.getWorld().body.addLast(tail);// hace que se añada la cola y no se deje alimento
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
+       
+      
+        
     }
+    	
+    
+			// TODO Auto-generated method stub
+			
+		
 
-    public void kill(){
+
+	public void kill(){
         lenght = 0;
+        //moveCounter = 0;//new
+         
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 

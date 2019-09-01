@@ -2,6 +2,7 @@ package Game.Entities.Static;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 import Main.Handler;
 
@@ -19,7 +20,19 @@ public class Apple {
         this.handler=handler;
         this.xCoord=x;
         this.yCoord=y;
-    }
        
+    }
+    
+   /* Apple goodApple = new Apple(handler,5,5);
+    Apple badApple =  new Apple(handler,10,10);
+    Random myApples = new Random();
+    
+    	
+
+	public void isGood() {
+    	
+    
+    }*/
+    
 
 }

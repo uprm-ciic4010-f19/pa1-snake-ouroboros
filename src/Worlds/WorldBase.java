@@ -3,6 +3,7 @@ package Worlds;
 import Game.Entities.Dynamic.Player;
 import Game.Entities.Dynamic.Tail;
 import Game.Entities.Static.Apple;
+import Game.GameStates.State;
 import Main.Handler;
 
 import java.awt.*;
@@ -53,17 +54,20 @@ public abstract class WorldBase {
 
     public void render(Graphics g){
 
-        /*for (int i = 0; i <= 800; i = i + GridPixelsize) {
-
-            g.setColor(Color.white);
+       for (int i = 0; i <= 800; i = i + GridPixelsize) {
+        	g.setColor(Color.WHITE);
             g.drawLine(0, i, handler.getWidth() , i);
             g.drawLine(i,0,i,handler.getHeight());
+           
             
             
-        }*/
-
-
+        }
+            //g.clearRect(0,0,handler.getWidth(),handler.getHeight());// nuevoo
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("arial", Font.PLAIN,14));//newwwwwwwwwwwwwwwwwwww
+       	    g.drawString("Scores: "+State.score, 550,20);
 
     }
+
 
 }
