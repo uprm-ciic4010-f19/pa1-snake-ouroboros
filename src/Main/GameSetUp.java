@@ -1,6 +1,7 @@
 package Main;
 
 import Display.DisplayScreen;
+import Game.Entities.Dynamic.Player;
 import Game.GameStates.GameState;
 import Game.GameStates.MenuState;
 import Game.GameStates.PauseState;
@@ -10,6 +11,8 @@ import Input.MouseManager;
 import Resources.Images;
 
 import javax.sound.sampled.*;
+
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -21,19 +24,18 @@ import java.io.InputStream;
  * Created by AlexVR on 7/1/2018.
  */
 
-public class GameSetUp implements Runnable {
+public class GameSetUp implements Runnable {//ojo
     private DisplayScreen display;
     private int width, height;
     public String title;
 
-    private boolean running = false;
-    private Thread thread;
+    private boolean running = false;//running pause state
+    private Thread thread;//ojo
 
     private BufferStrategy bs;
     private Graphics g;
 
-    //public int score = 0;//score new
-
+    
     //Input
     private KeyManager keyManager;
     private MouseManager mouseManager;
@@ -56,7 +58,7 @@ public class GameSetUp implements Runnable {
     private BufferedImage loading;
 
     public GameSetUp(String title, int width, int height){
-
+        
         this.width = width;
         this.height = height;
         this.title = title;
@@ -114,6 +116,7 @@ public class GameSetUp implements Runnable {
         //this runs the run method in this  class
         thread = new Thread(this);
         thread.start();
+       
     }
 
     public void run(){
@@ -130,6 +133,8 @@ public class GameSetUp implements Runnable {
         int ticks = 0;
 
         while(running){
+        	//new
+        	
             //makes sure the games runs smoothly at 60 FPS
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
@@ -153,6 +158,11 @@ public class GameSetUp implements Runnable {
         stop();
 
     }
+   
+    
+   
+            
+      
 
     private void tick(){
         //checks for key types and manages them
@@ -185,16 +195,21 @@ public class GameSetUp implements Runnable {
         g.dispose();
     }
 
-    public synchronized void stop(){
+    public synchronized void stop() {
         if(!running)
             return;
+       
         running = false;
         try {
+        	
             thread.join();
+            thread.interrupt();//new
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+    
+ 
 
     public KeyManager getKeyManager(){
         return keyManager;

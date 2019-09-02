@@ -10,6 +10,7 @@ import Game.Entities.Dynamic.Player;
 import Game.Entities.Dynamic.Tail;
 import Game.GameStates.PauseState;
 import Game.GameStates.State;
+import Main.GameSetUp;
 
 
 /**
@@ -40,13 +41,16 @@ public class KeyManager implements KeyListener {
 				cantPress[i]=false;
 
 			}else if(justPressed[i]){
-				cantPress[i]=true;
+				cantPress[i]=true;//cant pressed no se puede usar tecla
 				justPressed[i] =false;
 			}
 			if(!cantPress[i] && keys[i]){
 				justPressed[i]=true;
 			}
 		}
+		
+		
+		
 
 		up = keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_S];
@@ -55,7 +59,6 @@ public class KeyManager implements KeyListener {
 
 		pbutt = keys[KeyEvent.VK_ESCAPE];
 		
-	    
 
 	}
 	
@@ -64,7 +67,7 @@ public class KeyManager implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) { //nuevooooooooo
-			//add snake tail == 1;
+			
 			State.score = 0;
 			State.speed = 5;
 			Player.lenght = 1;
@@ -78,8 +81,9 @@ public class KeyManager implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){//nuevoo
 			
 			
-			//PauseState pause = new PauseState(Player.handler);
-			
+			/*GameSetUp pause = new GameSetUp(null, 0, 0);
+			pause.stop();
+			repaint();*/
 			 
 			}
 			
@@ -117,18 +121,24 @@ public class KeyManager implements KeyListener {
 		if(e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
 			return;
 		keys[e.getKeyCode()] = false;
+		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
+		
 	}
 
 	public boolean keyJustPressed(int keyCode){
 		if(keyCode < 0 || keyCode >= keys.length)
 			return false;
+	
 		return justPressed[keyCode];
+		
+		
+	
 	}
-	 
+   
+	
 
 }

@@ -1,15 +1,14 @@
 package Game.Entities.Dynamic;
 
 import Main.Handler;
-
-
-
-
+import Worlds.WorldBase;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-
+import java.util.LinkedList;
 import java.util.Random;
+
+
 
 import Display.DisplayScreen;
 import Game.GameStates.State;
@@ -31,7 +30,7 @@ import Game.GameStates.State;
 	 
 	
     
-    
+	
 	public static  int lenght;
    
     public boolean justAte;
@@ -45,15 +44,15 @@ import Game.GameStates.State;
 	
     
 
-    String direction;//is your first name one?
+    private String direction;//is your first name one?
     
     
 
    public Player(Handler handler) {
 	  
         this.handler = handler;
-        xCoord = 1;
-        yCoord = 1;
+        xCoord = 0;
+        yCoord = 0;
         moveCounter = 0;
         direction= "Right";
         justAte = false;
@@ -65,7 +64,7 @@ import Game.GameStates.State;
    
 	// TODO Auto-generated method stub
 	
-
+     
 
 	public void tick(){
         moveCounter++;
@@ -74,24 +73,31 @@ import Game.GameStates.State;
             checkCollisionAndMove();
             moveCounter=0;
         }
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction != "Down"){
             direction= "Up";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && direction != "Up"){
             direction="Down";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) && direction != "Right"){
             direction="Left";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && direction != "Left"){
             direction="Right";
         }
-
+        
+      
+       
     }
+	
+	
+    
 
-    public void checkCollisionAndMove(){
+
+	public void checkCollisionAndMove(){
         handler.getWorld().playerLocation[xCoord][yCoord]=false;
         int x = xCoord;
         int y = yCoord;
         switch (direction){
             case "Left":
+            	
                 if(xCoord==0){
                 	xCoord =59;
                     //kill();
@@ -142,18 +148,25 @@ import Game.GameStates.State;
             handler.getWorld().body.removeLast();
             handler.getWorld().body.addFirst(new Tail(x, y,handler)); // hace q se anada la cola
            
+        
         }
 
     }
-
+    
+   
     public void render(Graphics g,Boolean [][] playeLocation) {
     	
-       /* if(playeLocation[xCoord][yCoord] ==  ){
-        	moveCounter = 0;
-             }*/
-    	  
+    	/*for(int i = 0; i<lenght; i++) {
+    		if(WorldBase.body.get(0).x == WorldBase.body.get(i).x && WorldBase.body.get(0).y == WorldBase.body.get(i).y){
+    		  moveCounter = 0; 
+    		  }
+    		}*/
+    	/*for(int i = 0; i<lenght; i++) {
+    		if(xCoord == WorldBase.body.get(i).x && yCoord == WorldBase.body.get(i).y){
+    		  moveCounter = 0; 
+    		  }
+    	}*/
     	
-        
     	
         Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
@@ -178,18 +191,11 @@ import Game.GameStates.State;
     
    
 
-  
-    	
-		
-	
-
-
-		
 
 
 		public void Eat() {
         
-    	State.score= Math.sqrt(2*State.score + 1);//cambiooooooo
+    	State.score= State.score + Math.sqrt(2*State.score + 1);//cambiooooooo
     	State.speed --;//new
         lenght++;
         Tail tail= null;

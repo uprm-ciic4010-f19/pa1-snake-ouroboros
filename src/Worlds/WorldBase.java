@@ -1,12 +1,15 @@
 package Worlds;
 
 import Game.Entities.Dynamic.Player;
+
 import Game.Entities.Dynamic.Tail;
 import Game.Entities.Static.Apple;
 import Game.GameStates.State;
 import Main.Handler;
 
 import java.awt.*;
+//import java.util.LinkedList;
+
 import java.util.LinkedList;
 
 
@@ -36,7 +39,12 @@ public abstract class WorldBase {
 
     public Boolean[][] playerLocation;
 
-    public LinkedList<Tail> body = new LinkedList<>();
+    public static LinkedList<Tail> body = new LinkedList<>();
+   /* public LinkedList<Tail> Getbody()
+    {
+       return body;//nuevoooo
+    }*/
+    
 
 
     public WorldBase(Handler handler){
@@ -48,7 +56,7 @@ public abstract class WorldBase {
     }
     public void tick(){
 
-
+    	
 
     }
 
@@ -62,7 +70,7 @@ public abstract class WorldBase {
             
             
         }
-            //g.clearRect(0,0,handler.getWidth(),handler.getHeight());// nuevoo
+            g.clearRect(0,0,handler.getWidth(),handler.getHeight());// nuevoo
             g.setColor(Color.WHITE);
             g.setFont(new Font("arial", Font.PLAIN,14));//newwwwwwwwwwwwwwwwwwww
        	    g.drawString("Scores: "+State.score, 550,20);

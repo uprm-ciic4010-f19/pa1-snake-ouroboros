@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+import Game.Entities.Dynamic.Player;
+import Game.GameStates.State;
 import Main.Handler;
 
 /**
@@ -27,12 +29,19 @@ public class Apple {
     Apple badApple =  new Apple(handler,10,10);
     Random myApples = new Random();
     
-    	
+     
 
 	public void isGood() {
+	     State.score = Math.sqrt(2*State.score + 1);
+	     State.speed--;
+	 }
+	public void isBad(){
+		State.score = State.score - Math.sqrt(2*State.score + 1);
+		
+	}*/
     	
     
-    }*/
+    }
     
 
-}
+

@@ -3,10 +3,11 @@ package Game.GameStates;
 import Main.Handler;
 
 
+
 import Resources.Images;
 import UI.UIImageButton;
 import UI.UIManager;
-
+import javafx.scene.chart.XYChart.Data;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -51,6 +52,7 @@ public class PauseState extends State {
 
 
     }
+    
 
     @Override
     public void tick() {
@@ -80,7 +82,8 @@ public class PauseState extends State {
         
     	
     }
-  
+	
+ 
 	
 	
 
