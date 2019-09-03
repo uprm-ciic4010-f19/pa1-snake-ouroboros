@@ -84,6 +84,7 @@ public class KeyManager implements KeyListener {
 			/*GameSetUp pause = new GameSetUp(null, 0, 0);
 			pause.stop();
 			repaint();*/
+	
 			 
 			}
 			

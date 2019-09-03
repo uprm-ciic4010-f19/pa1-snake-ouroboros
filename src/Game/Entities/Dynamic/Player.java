@@ -156,16 +156,20 @@ import Game.GameStates.State;
    
     public void render(Graphics g,Boolean [][] playeLocation) {
     	
-    	/*for(int i = 0; i<lenght; i++) {
+    	/*for(int i = 1; i<WorldBase.body.size(); i++) {
     		if(WorldBase.body.get(0).x == WorldBase.body.get(i).x && WorldBase.body.get(0).y == WorldBase.body.get(i).y){
     		  moveCounter = 0; 
     		  }
     		}*/
-    	/*for(int i = 0; i<lenght; i++) {
+    	for(int i =1; i<WorldBase.body.size(); i++) {
     		if(xCoord == WorldBase.body.get(i).x && yCoord == WorldBase.body.get(i).y){
-    		  moveCounter = 0; 
+    		  moveCounter = 0;
+    		  
+    		  g.setColor(Color.RED);
+    		  g.setFont(new Font("arial", Font.BOLD, 50));
+    		  g.drawString("Game Over", 250, 350);
     		  }
-    	}*/
+    	}
     	
     	
         Random r = new Random();
@@ -319,7 +323,7 @@ import Game.GameStates.State;
 
 	public void kill(){
         lenght = 0;
-        //moveCounter = 0;//new
+        //new
          
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
