@@ -40,10 +40,7 @@ public abstract class WorldBase {
     public Boolean[][] playerLocation;
 
     public static LinkedList<Tail> body = new LinkedList<>();
-   /* public LinkedList<Tail> Getbody()
-    {
-       return body;//nuevoooo
-    }*/
+  
     
 
 

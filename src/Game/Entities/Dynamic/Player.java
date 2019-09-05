@@ -73,7 +73,7 @@ import Game.GameStates.State;
             checkCollisionAndMove();
             moveCounter=0;
         }
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction != "Down"){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction != "Down"){ //direction!= prevent backtracking
             direction= "Up";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && direction != "Up"){
             direction="Down";
@@ -143,7 +143,7 @@ import Game.GameStates.State;
             Eat();
         }
 
-        if(!handler.getWorld().body.isEmpty()) {
+        if(!handler.getWorld().body.isEmpty()) {// to not move all pieces. i just take last one and put it in empty body
             handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
             handler.getWorld().body.removeLast();
             handler.getWorld().body.addFirst(new Tail(x, y,handler)); // hace q se anada la cola
@@ -153,22 +153,24 @@ import Game.GameStates.State;
 
     }
     
+    
    
     public void render(Graphics g,Boolean [][] playeLocation) {
     	
-    	/*for(int i = 1; i<WorldBase.body.size(); i++) {
-    		if(WorldBase.body.get(0).x == WorldBase.body.get(i).x && WorldBase.body.get(0).y == WorldBase.body.get(i).y){
-    		  moveCounter = 0; 
-    		  }
-    		}*/
-    	for(int i =1; i<WorldBase.body.size(); i++) {
+    	
+    	for(int i =3; i<WorldBase.body.size(); i++) {//i=1 da un error leve
     		if(xCoord == WorldBase.body.get(i).x && yCoord == WorldBase.body.get(i).y){
     		  moveCounter = 0;
     		  
     		  g.setColor(Color.RED);
     		  g.setFont(new Font("arial", Font.BOLD, 50));
     		  g.drawString("Game Over", 250, 350);
-    		  }
+    		  
+    		  g.setColor(Color.WHITE);
+    		  g.setFont(new Font ("arial", Font.BOLD, 20));
+    		  g.drawString("Space to RESTART", 300, 400);  
+    		  
+    		 }
     	}
     	
     	
@@ -176,15 +178,28 @@ import Game.GameStates.State;
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
             	
-                g.setColor(Color.GREEN);//Cambio 
+               // g.setColor(Color.GREEN);//Cambio 
                 
-                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
-                    g.fillRect((i*handler.getWorld().GridPixelsize),
+                 if(playeLocation[i][j]){//split this playeLocation[i][j] and handler.getWorld().appleLocation[i][j]
+                	 g.setColor(Color.GREEN);
+                	 g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize);
+                 }
+                 if(handler.getWorld().appleLocation[i][j]){
+                	 g.setColor(Color.RED);
+                	 g.fillRect((i*handler.getWorld().GridPixelsize),
+                            (j*handler.getWorld().GridPixelsize),
+                            handler.getWorld().GridPixelsize,
+                            handler.getWorld().GridPixelsize); 
+                 }
+                     //split if statement
+                    // if player and down if apple
+                   //imagesdraw.myappleimage
+                	 //if(playeLocation[i][j] || handler.getWorld().appleLocation[i][j]){
                    
-                }
+                
               
             
             }
@@ -203,8 +218,8 @@ import Game.GameStates.State;
     	State.speed --;//new
         lenght++;
         Tail tail= null;
-        handler.getWorld().appleLocation[xCoord][yCoord]=false; //hace que se coja la manzana
-        handler.getWorld().appleOnBoard=false; // hace q aparezcan mas manzanas
+        handler.getWorld().appleLocation[xCoord][yCoord]=false; //when eat apple get rid of it.. maybe usar algo parecido para la cola
+        handler.getWorld().appleOnBoard=false; // hace q aparezcan mas manzanas generate apple
         switch (direction){
         
             
@@ -307,7 +322,7 @@ import Game.GameStates.State;
                 break;
        
         }
-       
+       // i can call eat method to add tail so maybe it dont give me error
         handler.getWorld().body.addLast(tail);// hace que se añada la cola y no se deje alimento
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
        

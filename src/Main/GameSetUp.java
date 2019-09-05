@@ -75,12 +75,12 @@ public class GameSetUp implements Runnable {//ojo
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
 
-        Images img = new Images();
+        Images img = new Images();// all images
 
 
         handler = new Handler(this);
 
-        gameState = new GameState(handler);
+        gameState = new GameState(handler); //states are screens
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
 
@@ -114,7 +114,7 @@ public class GameSetUp implements Runnable {//ojo
             return;
         running = true;
         //this runs the run method in this  class
-        thread = new Thread(this);
+        thread = new Thread(this);//allow too run multiple pieces of code at a time
         thread.start();
        
     }
@@ -133,7 +133,7 @@ public class GameSetUp implements Runnable {//ojo
         int ticks = 0;
 
         while(running){
-        	//new
+        	
         	
             //makes sure the games runs smoothly at 60 FPS
             now = System.nanoTime();

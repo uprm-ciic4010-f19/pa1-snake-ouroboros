@@ -11,6 +11,7 @@ import Game.Entities.Dynamic.Tail;
 import Game.GameStates.PauseState;
 import Game.GameStates.State;
 import Main.GameSetUp;
+import Worlds.WorldBase;
 
 
 /**
@@ -66,17 +67,26 @@ public class KeyManager implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) { //nuevooooooooo
 			
 			State.score = 0;
 			State.speed = 5;
 			Player.lenght = 1;
-			/*for(int i =1; i>Player.lenght; i ++) {
-			Player.handler.getWorld().body.removeLast();
-			}*/
-		    
+			Player.xCoord = 0;
+			Player.yCoord = 0;
+			/*for(int i = 1; i<WorldBase.body.size(); i++) {
+	    		Player.handler.getWorld().body.removeLast();
+	    		
+	    	}*/
 			repaint();
-		}
+	    }
+			
+			//Player.handler.getWorld().body.removeLast();
+		
+		    
+			
+		
 		
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){//nuevoo
 			
@@ -97,7 +107,7 @@ public class KeyManager implements KeyListener {
            
 		   repaint();	
 	   }
-        if(e.getKeyCode() == KeyEvent.VK_ADD) {//nuevooo
+        if(e.getKeyCode() == KeyEvent.VK_ADD) {//nuevooo maybe poner = also for the another key
             State.speed --;
             repaint();	
  		}

@@ -25,13 +25,13 @@ public class GameState extends State{
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 
-                handler.getWorld().playerLocation[i][j]=false;
+                handler.getWorld().playerLocation[i][j]=false; //poner player pos = (0,0) maybe
                 handler.getWorld().appleLocation[i][j]=false;
                 
 
             }
         }
-        handler.getWorld().playerLocation[handler.getWorld().player.xCoord][handler.getWorld().player.yCoord] =true;
+        handler.getWorld().playerLocation[handler.getWorld().player.xCoord][handler.getWorld().player.yCoord] =true;//maybe pos (0,0)
 
 
     }
@@ -40,7 +40,7 @@ public class GameState extends State{
     
     public void tick() {
 
-        handler.getWorld().tick();
+        handler.getWorld().tick();//take it
 
     }
     
@@ -49,7 +49,7 @@ public class GameState extends State{
     public void render(Graphics g) {
     
 	 
-     handler.getWorld().render(g);
+     handler.getWorld().render(g);//render it
     
     }
     

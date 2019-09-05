@@ -17,7 +17,7 @@ public class WorldOne extends WorldBase{
         //has to be a number bigger than 20 and even
         GridWidthHeightPixelCount = 60;
         GridPixelsize = (800/GridWidthHeightPixelCount);
-        playerLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
+        playerLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];//player location maybe (0,0)
         appleLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
         
     }
@@ -34,12 +34,12 @@ public class WorldOne extends WorldBase{
             //change coordinates till one is selected in which the player isnt standing
             boolean goodCoordinates=false;
             do{
-                if(!handler.getWorld().playerLocation[appleX][appley]){
+                if(!handler.getWorld().playerLocation[appleX][appley]){ //check if the apple is in a good coordinate 
                     goodCoordinates=true;
                 }
             }while(!goodCoordinates);
 
-            apple = new Apple(handler,appleX,appley);
+            apple = new Apple(handler,appleX,appley);// if pass the test then put apple there
             appleLocation[appleX][appley]=true;
 
         }

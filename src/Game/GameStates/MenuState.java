@@ -25,7 +25,7 @@ public class MenuState extends State {
         uiManager.addObjects(new UIImageButton(handler.getWidth()/2-64, handler.getHeight()/2-32, 128, 64, Images.butstart, new ClickListlener() {
             @Override
             public void onClick() {
-                handler.getMouseManager().setUimanager(null);
+                handler.getMouseManager().setUimanager(null); //when pressing start button it changes
                 handler.getGame().reStart();
                 State.setState(handler.getGame().gameState);
             }
@@ -44,7 +44,7 @@ public class MenuState extends State {
         g.setColor(Color.darkGray);
         g.fillRect(0,0,handler.getWidth(),handler.getHeight());
         g.drawImage(Images.title,0,0,handler.getWidth(),handler.getHeight(),null);
-        uiManager.Render(g);
+        uiManager.Render(g);//make start button visible
 
     }
 

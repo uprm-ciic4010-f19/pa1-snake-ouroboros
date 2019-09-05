@@ -12,7 +12,7 @@ import Worlds.WorldBase;
  */
 
 public class Handler{
-
+//Handler.getWorld.getPlayer crear player
     private GameSetUp game;
     private WorldBase world;
 
