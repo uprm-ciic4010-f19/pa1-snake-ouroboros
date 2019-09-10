@@ -13,7 +13,7 @@ import Worlds.WorldBase;
 
 public class Handler{
 //Handler.getWorld.getPlayer crear player
-    private GameSetUp game;
+    private static GameSetUp game;
     private WorldBase world;
 
     public Handler(GameSetUp game){
@@ -28,7 +28,7 @@ public class Handler{
         return game.getHeight();
     }
 
-    public GameSetUp getGame() {
+    public static GameSetUp getGame() {
         return game;
     }
 

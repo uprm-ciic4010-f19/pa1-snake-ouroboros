@@ -11,6 +11,7 @@ import Game.Entities.Dynamic.Tail;
 import Game.GameStates.PauseState;
 import Game.GameStates.State;
 import Main.GameSetUp;
+import Main.Handler;
 import Worlds.WorldBase;
 
 
@@ -58,7 +59,6 @@ public class KeyManager implements KeyListener {
 		left = keys[KeyEvent.VK_A];
 		right = keys[KeyEvent.VK_D];
 
-		pbutt = keys[KeyEvent.VK_ESCAPE];
 		
 
 	}
@@ -67,51 +67,37 @@ public class KeyManager implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){//pauses game
+			
+			State.setState(Handler.getGame().pauseState);
+
+			}
 		
-		if(e.getKeyCode() == KeyEvent.VK_SPACE) { //nuevooooooooo
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) { //restarts game
 			
 			State.score = 0;
 			State.speed = 5;
 			Player.lenght = 1;
 			Player.xCoord = 0;
 			Player.yCoord = 0;
-			/*for(int i = 1; i<WorldBase.body.size(); i++) {
-	    		Player.handler.getWorld().body.removeLast();
-	    		
-	    	}*/
+
 			repaint();
 	    }
-			
-			//Player.handler.getWorld().body.removeLast();
-		
-		    
-			
 		
 		
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){//nuevoo
-			
-			
-			/*GameSetUp pause = new GameSetUp(null, 0, 0);
-			pause.stop();
-			repaint();*/
-	
-			 
-			}
-			
-		
-		
-        if(e.getKeyCode() == KeyEvent.VK_N) {//nuevooo
+        if(e.getKeyCode() == KeyEvent.VK_N) {//adds tail
           
           Player.lenght++;
           Player.handler.getWorld().body.addFirst(new Tail(Player.xCoord,Player.yCoord,Player.handler));//anade la cola nuevoooo           
            
 		   repaint();	
 	   }
-        if(e.getKeyCode() == KeyEvent.VK_ADD) {//nuevooo maybe poner = also for the another key
+        if(e.getKeyCode() == KeyEvent.VK_ADD) {//increases speed maybe poner = also for the another key
             State.speed --;
             repaint();	
  		}
-        if(e.getKeyCode() == KeyEvent.VK_SUBTRACT) {//nuevooo
+        if(e.getKeyCode() == KeyEvent.VK_SUBTRACT) {//reduces speed
             State.speed ++;
             repaint();	
  		}

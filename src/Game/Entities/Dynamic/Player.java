@@ -13,24 +13,10 @@ import java.util.Random;
 import Display.DisplayScreen;
 import Game.GameStates.State;
 
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Created by AlexVR on 7/2/2018.
  */public class Player{
-	 
-	
-    
-	
+
 	public static  int lenght;
    
     public boolean justAte;
@@ -41,8 +27,6 @@ import Game.GameStates.State;
 
     public static int moveCounter;
 
-	
-    
 
     private String direction;//is your first name one?
     
@@ -73,7 +57,7 @@ import Game.GameStates.State;
             checkCollisionAndMove();
             moveCounter=0;
         }
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction != "Down"){ //direction!= prevent backtracking
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction != "Down"){ //direction != prevents backtracking
             direction= "Up";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && direction != "Up"){
             direction="Down";
@@ -163,12 +147,12 @@ import Game.GameStates.State;
     		  moveCounter = 0;
     		  
     		  g.setColor(Color.RED);
-    		  g.setFont(new Font("arial", Font.BOLD, 50));
-    		  g.drawString("Game Over", 250, 350);
+    		  g.setFont(new Font("arial", Font.BOLD, 80));
+    		  g.drawString("Game Over", 180, 350);
     		  
     		  g.setColor(Color.WHITE);
     		  g.setFont(new Font ("arial", Font.BOLD, 20));
-    		  g.drawString("Space to RESTART", 300, 400);  
+    		  g.drawString("Press Space to Restart", 280, 400);  
     		  
     		 }
     	}
@@ -178,17 +162,16 @@ import Game.GameStates.State;
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
             	
-               // g.setColor(Color.GREEN);//Cambio 
                 
                  if(playeLocation[i][j]){//split this playeLocation[i][j] and handler.getWorld().appleLocation[i][j]
-                	 g.setColor(Color.GREEN);
+                	 g.setColor(Color.GREEN);// snake color
                 	 g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize);
                  }
                  if(handler.getWorld().appleLocation[i][j]){
-                	 g.setColor(Color.RED);
+                	 g.setColor(Color.RED);//apple color
                 	 g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
@@ -214,7 +197,7 @@ import Game.GameStates.State;
 
 		public void Eat() {
         
-    	State.score= State.score + Math.sqrt(2*State.score + 1);//cambiooooooo
+    	State.score= State.score + Math.sqrt(2*State.score + 1);//score
     	State.speed --;//new
         lenght++;
         Tail tail= null;
@@ -330,11 +313,6 @@ import Game.GameStates.State;
         
     }
     	
-    
-			// TODO Auto-generated method stub
-			
-		
-
 
 	public void kill(){
         lenght = 0;
