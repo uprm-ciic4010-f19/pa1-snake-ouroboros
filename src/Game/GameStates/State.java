@@ -31,7 +31,7 @@ public abstract class State {
 
     public abstract void render(Graphics g);
 
-    public static double score =0;//nuevo
+    public static double score = 0;//nuevo
     public static int speed = 5;//nuevo
     
 }

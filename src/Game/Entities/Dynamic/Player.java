@@ -197,10 +197,13 @@ import Game.GameStates.State;
 
 		public void Eat() {
 			
-			if(handler.getWorld().apple.isGood) {
-        
-    	State.score= State.score + 5;//score
-//    	State.speed --;//new
+		if(handler.getWorld().apple.isGood) {
+        if(State.score>=0) {
+    	State.score= State.score + Math.sqrt(2*State.score + 1);
+        } else {
+        State.score= State.score + Math.sqrt(2*(-State.score) + 1);	
+        }
+     	State.speed --;//new
         lenght++;
         Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false; //when eat apple get rid of it.. maybe usar algo parecido para la cola
@@ -315,8 +318,16 @@ import Game.GameStates.State;
     		
     		handler.getWorld().appleLocation[xCoord][yCoord]=false;
             handler.getWorld().appleOnBoard=false;
-            State.score=State.score-5;
-    		
+            if(State.score >= 0) {
+            State.score=State.score - Math.sqrt(2*(State.score) + 1);
+            }else {
+            State.score=State.score - Math.sqrt(2*(-State.score) + 1);
+            }
+            if(!handler.getWorld().body.isEmpty()) {
+				 handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y]=false;
+				 handler.getWorld().body.removeLast();
+
+			 }
         }
         
     }

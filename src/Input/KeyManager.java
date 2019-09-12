@@ -81,6 +81,11 @@ public class KeyManager implements KeyListener {
 			Player.lenght = 1;
 			Player.xCoord = 0;
 			Player.yCoord = 0;
+			if(!Player.handler.getWorld().body.isEmpty()) {
+				 Player.handler.getWorld().playerLocation[Player.handler.getWorld().body.getLast().x][Player.handler.getWorld().body.getLast().y]=false;
+				 Player.handler.getWorld().body.removeLast();
+
+			 }
 
 			repaint();
 	    }
