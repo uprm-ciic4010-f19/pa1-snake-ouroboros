@@ -7,7 +7,6 @@ import Main.Handler;
 import Resources.Images;
 import UI.UIImageButton;
 import UI.UIManager;
-import javafx.scene.chart.XYChart.Data;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

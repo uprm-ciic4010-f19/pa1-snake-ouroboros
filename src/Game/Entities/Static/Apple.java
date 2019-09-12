@@ -14,7 +14,9 @@ import Main.Handler;
 public class Apple {
 
     private Handler handler;
-
+    public boolean isGood;
+    public int count;
+    public Color color;
     public int xCoord;
     public int yCoord;
 
@@ -22,8 +24,24 @@ public class Apple {
         this.handler=handler;
         this.xCoord=x;
         this.yCoord=y;
-       
+        count=0;
+        isGood=true;
+        color=Color.RED;
     }
+    
+    
+    
+public void tick() {
+    	
+    	count++;
+    	if(count>=300) isGood=false;
+    	
+    	
+    	if(!isGood)
+    		color= new Color(139,69,19);
+    	
+    }
+    
     
    /* Apple goodApple = new Apple(handler,5,5);
     Apple badApple =  new Apple(handler,10,10);

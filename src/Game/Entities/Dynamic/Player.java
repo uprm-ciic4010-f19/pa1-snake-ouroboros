@@ -171,7 +171,7 @@ import Game.GameStates.State;
                             handler.getWorld().GridPixelsize);
                  }
                  if(handler.getWorld().appleLocation[i][j]){
-                	 g.setColor(Color.RED);//apple color
+                	 g.setColor(handler.getWorld().apple.color);//apple color
                 	 g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
@@ -196,9 +196,11 @@ import Game.GameStates.State;
 
 
 		public void Eat() {
+			
+			if(handler.getWorld().apple.isGood) {
         
-    	State.score= State.score + Math.sqrt(2*State.score + 1);//score
-    	State.speed --;//new
+    	State.score= State.score + 5;//score
+//    	State.speed --;//new
         lenght++;
         Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false; //when eat apple get rid of it.. maybe usar algo parecido para la cola
@@ -309,7 +311,13 @@ import Game.GameStates.State;
         handler.getWorld().body.addLast(tail);// hace que se añada la cola y no se deje alimento
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
        
-      
+		}else {
+    		
+    		handler.getWorld().appleLocation[xCoord][yCoord]=false;
+            handler.getWorld().appleOnBoard=false;
+            State.score=State.score-5;
+    		
+        }
         
     }
     	

@@ -42,6 +42,8 @@ public class WorldOne extends WorldBase{
             apple = new Apple(handler,appleX,appley);// if pass the test then put apple there
             appleLocation[appleX][appley]=true;
 
+        } else {
+        	apple.tick();
         }
     }
 
