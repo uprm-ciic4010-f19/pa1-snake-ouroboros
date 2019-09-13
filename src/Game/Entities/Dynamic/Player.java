@@ -32,45 +32,7 @@ import Game.GameStates.State;
 
 
 
-<<<<<<< HEAD
-		public void Eat() {
-			
-		if(handler.getWorld().apple.isGood) {
-        if(State.score>=0) {
-    	State.score= State.score + Math.sqrt(2*State.score + 1);
-        } else {
-        State.score= State.score + Math.sqrt(2*(-State.score) + 1);	
-        }
-     	State.speed --;//new
-        lenght++;
-        Tail tail= null;
-        handler.getWorld().appleLocation[xCoord][yCoord]=false; //when eat apple get rid of it.. maybe usar algo parecido para la cola
-        handler.getWorld().appleOnBoard=false; // hace q aparezcan mas manzanas generate apple
-        switch (direction){
-        
-            
-             case "Left" : 
-                if( handler.getWorld().body.isEmpty()){
-                    if(this.xCoord!=handler.getWorld().GridWidthHeightPixelCount-1){
-                        tail = new Tail(this.xCoord+1,this.yCoord,handler);
-                    }else{
-                        if(this.yCoord!=0){
-                            tail = new Tail(this.xCoord,this.yCoord-1,handler);
-                        }else{
-                            tail =new Tail(this.xCoord,this.yCoord+1,handler);
-                        }
-                    }
-                }else{
-                        if(handler.getWorld().body.getLast().x!=handler.getWorld().GridWidthHeightPixelCount-1){
-                        tail=new Tail(handler.getWorld().body.getLast().x+1,this.yCoord,handler);
-                    }else{
-                        if(handler.getWorld().body.getLast().y!=0){
-                            tail=new Tail(handler.getWorld().body.getLast().x,this.yCoord-1,handler);
-                        }else{
-                            tail=new Tail(handler.getWorld().body.getLast().x,this.yCoord+1,handler);
-=======
 	 public Player(Handler handler) {
->>>>>>> refs/heads/scorefix_and_taillose
 
 		 this.handler = handler;
 		 xCoord = 0;
@@ -84,36 +46,7 @@ import Game.GameStates.State;
 	 }
 
 
-<<<<<<< HEAD
-                }
-                break;
-       
-        }
-       // i can call eat method to add tail so maybe it dont give me error
-        handler.getWorld().body.addLast(tail);// hace que se añada la cola y no se deje alimento
-        handler.getWorld().playerLocation[tail.x][tail.y] = true;
-       
-		}else {
-    		
-    		handler.getWorld().appleLocation[xCoord][yCoord]=false;
-            handler.getWorld().appleOnBoard=false;
-            if(State.score >= 0) {
-            State.score=State.score - Math.sqrt(2*(State.score) + 1);
-            }else {
-            State.score=State.score - Math.sqrt(2*(-State.score) + 1);
-            }
-            if(!handler.getWorld().body.isEmpty()) {
-				 handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y]=false;
-				 handler.getWorld().body.removeLast();
-
-			 }
-        }
-        
-    }
-    	
-=======
 	 // TODO Auto-generated method stub
->>>>>>> refs/heads/scorefix_and_taillose
 
 
 
@@ -265,9 +198,13 @@ import Game.GameStates.State;
 	 public void Eat() {
 
 		 if(handler.getWorld().apple.isGood) {
-
-			 State.score= State.score + 5;//score
-			 //    	State.speed --;//new
+             if(State.score >= 0) {
+			 State.score= State.score + Math.sqrt(2*State.score +1);
+             }else {
+            	 State.score= State.score + Math.sqrt(2*(-State.score) +1);	 
+             }
+             //score
+		   	 State.speed --;//new
 			 lenght++;
 			 Tail tail= null;
 			 handler.getWorld().appleLocation[xCoord][yCoord]=false; //when eat apple get rid of it.. maybe usar algo parecido para la cola
@@ -381,7 +318,11 @@ import Game.GameStates.State;
 		 }else {
 			 handler.getWorld().appleLocation[xCoord][yCoord]=false;
 			 handler.getWorld().appleOnBoard=false;
-			 State.score=State.score-5;
+			 if(State.score >= 0) {
+				 State.score= State.score - Math.sqrt(2*State.score +1);
+	             }else {
+	            	 State.score= State.score - Math.sqrt(2*(-State.score) +1);	 
+	             }
 
 			 if(!handler.getWorld().body.isEmpty()) {
 				 handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y]=false;
